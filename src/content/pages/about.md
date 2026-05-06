@@ -2,7 +2,7 @@
 title: "About Us"
 welcome_body: |
   Our passion is enhancing your Japanese travel experience through informative and entertaining tours, rich in what you might miss out on as an independent traveller. The Hida region has a myriad of unique sights and experiences, not all easily accessible to the unguided. We aim to open the doors on authentic rural Japan, whether through interaction with local people, or providing insight into local culture and traditions, or showcasing nature and its rhythms in the impressive Hida landscape.
-guide_name: "Hisa Matsuo"
+guide_name: "Kazuhisa Matsuo"
 guide_title: "Owner and guide of DISCOVERY HIDA"
 guide_photo: "/images/guide.jpg"
 guide_bio: |
