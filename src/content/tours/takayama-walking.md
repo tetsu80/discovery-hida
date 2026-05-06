@@ -1,33 +1,36 @@
 ---
-title: "高山半日ウォーキングツアー"
+title: "Best of Takayama Half Day Walking Tour"
 thumbnail: "/images/tour-walking.jpg"
-duration: "約4時間"
-price: "お問い合わせください"
+duration: "Approx. 4 hours"
+price: "Price on request"
 min_guests: "1"
 max_guests: "6"
-meeting_point: "高山駅東口"
-summary: "朝市で地元の工芸品や名産品を堪能し、伝統的な商人の家を訪れて、この地域ならではの建築様式や木工技術を間近で見学し、精巧に装飾された祭りの山車を鑑賞しましょう。高山の魅力を余すところなく満喫できるツアーです。"
+meeting_point: "Takayama Station East Exit"
+summary: "Enjoy local crafts and produce at the morning markets, visit a traditional merchant's house to see the architecture and woodworking of the area first-hand, and marvel at the intricately decorated festival floats. The perfect introduction to Takayama."
 body: |
-  ## ツアーのハイライト
+  ## Tour Highlights
 
-  朝市で地元の工芸品や名産品を堪能し、伝統的な商人の家を訪れて、この地域ならではの建築様式や木工技術を間近で見学しましょう。
+  Enjoy local crafts and produce at the morning markets, visit a traditional merchant's house to see the architecture and woodworking of the area first-hand, and marvel at the intricately decorated festival floats.
 
-  精巧に装飾された祭りの山車を鑑賞し、高山の魅力を余すところなく満喫できます。
+  Your guide will take you to hidden spots known only to locals — places you won't find in any guidebook.
 
-  地元ガイドだからこそ知っている隠れた名所や、観光ガイドブックには載っていないスポットもご案内します。
+  - Morning market (Jinya-mae or Miyagawa)
+  - Traditional merchant houses (Kusakabe Folk Museum or Yoshijima Heritage House)
+  - Sanmachi Suji — the historic old town district
+  - Yatai Kaikan — the festival float exhibition hall
 
-  ## ツアー行程
+  ## Itinerary
 
-  - 集合・出発
-  - 高山陣屋・朝市見学
-  - 古い町並み（上三之町）散策
-  - 日下部民藝館 または 吉島家住宅見学
-  - 祭屋台会館見学
-  - 解散
+  - Meet at Takayama Station East Exit
+  - Visit the morning market
+  - Stroll through the old town (Sanmachi Suji)
+  - Tour a traditional merchant's house
+  - Yatai Kaikan festival float exhibition
+  - Farewell
 what_to_bring:
-  - "歩きやすい靴"
-  - "季節に応じた服装"
-  - "カメラ"
-  - "飲料水"
+  - "Comfortable walking shoes"
+  - "Seasonal clothing"
+  - "Camera"
+  - "Water"
 order: 1
 ---

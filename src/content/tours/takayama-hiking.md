@@ -1,38 +1,38 @@
 ---
-title: "高山ハイキング＆田舎暮らしツアー"
+title: "Takayama Hiking and Rural Life Tour"
 thumbnail: "/images/tour-hiking.jpg"
-duration: "約6時間"
-price: "お問い合わせください"
+duration: "Approx. 6 hours"
+price: "Price on request"
 min_guests: "2"
 max_guests: "6"
-meeting_point: "高山駅東口"
-summary: "もっとアウトドア体験をお探しですか？飛騨地方は山々に囲まれた地域です。このツアーでは、街並みと田園地帯の壮大な景色を眺めながら、山々の魅力を存分に味わえます。地元の動植物を観察したり、伝統的な城跡を訪れたり、田んぼの耕作と人々の生活様式との密接な繋がりを感じたり、伝統的な家屋の雰囲気に浸ったりと、様々な体験ができます。"
+meeting_point: "Takayama Station East Exit"
+summary: "Looking for something more adventurous? The Hida region is surrounded by mountains. This tour lets you enjoy the grandeur of the peaks while taking in sweeping views of the town and countryside below — observing local flora and fauna, visiting ancient castle ruins, experiencing the deep connection between rice farming and daily life, and soaking up the atmosphere of traditional farmhouses."
 body: |
-  ## ツアーのハイライト
+  ## Tour Highlights
 
-  飛騨地方は山々に囲まれた地域です。このツアーでは、街並みと田園地帯の壮大な景色を眺めながら、山々の魅力を存分に味わえます。
+  The Hida region is surrounded by mountains. This tour lets you experience the grandeur of the peaks while taking in sweeping views of the town and rural landscape below.
 
-  - 地元の動植物を観察
-  - 伝統的な城跡を訪問
-  - 田んぼの耕作と人々の生活様式との密接な繋がりを体感
-  - 伝統的な家屋の雰囲気に浸る
+  - Observe local flora and fauna with expert commentary
+  - Visit ancient castle ruins
+  - Experience the deep connection between rice farming and daily life
+  - Soak up the atmosphere of traditional thatched farmhouses
 
-  地元ガイドならではの視点で、飛騨の自然と暮らしを深く体験できます。
+  Your local guide brings the mountains and countryside to life with insights you won't find anywhere else.
 
-  ## ツアー行程
+  ## Itinerary
 
-  - 集合・出発
-  - ハイキングコース開始
-  - 展望スポットで休憩・景色を楽しむ
-  - 田舎の集落・伝統家屋見学
-  - 昼食（地元の食材を使った料理）
-  - 下山・解散
+  - Meet at Takayama Station East Exit
+  - Begin hiking course
+  - Rest at a scenic viewpoint — take in the panoramic view
+  - Visit a rural hamlet and traditional farmhouses
+  - Lunch featuring locally-sourced cuisine
+  - Descend and farewell
 what_to_bring:
-  - "トレッキングシューズ（スニーカー可）"
-  - "雨具"
-  - "飲料水（1L以上）"
-  - "軽食またはおやつ"
-  - "帽子・日焼け止め"
-  - "カメラ"
+  - "Hiking boots or sturdy shoes"
+  - "Rain gear"
+  - "Water (1 litre or more)"
+  - "Light snack"
+  - "Hat and sunscreen"
+  - "Camera"
 order: 2
 ---
