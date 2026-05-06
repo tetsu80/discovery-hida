@@ -22,7 +22,7 @@ export async function getStaticPaths() {
       let result = '';
       for (let i = idx + 1; i < fm.length; i++) {
         const l = fm[i];
-        if (l.match(/^\S/) || l.trim() === '') break;
+        if (l.length > 0 && l[0] !== ' ') break;
         result += l.trim() + '\n';
       }
       return result.trim();
@@ -40,6 +40,7 @@ export async function getStaticPaths() {
     };
     return {
       title: get('title'), thumbnail: get('thumbnail'), duration: get('duration'),
+      season: get('season'),
       price: get('price'), min_guests: get('min_guests'), max_guests: get('max_guests'),
       meeting_point: get('meeting_point'), summary: get('summary'),
       body: getBlock('body') || body.trim(),
@@ -53,15 +54,62 @@ export async function getStaticPaths() {
   });
 }
 
-const { title, thumbnail, duration, price, min_guests, max_guests, meeting_point, summary, body, what_to_bring } = Astro.props;
+const { title, thumbnail, duration, season, price, min_guests, max_guests, meeting_point, summary, body, what_to_bring } = Astro.props;
 
-// Simple markdown-ish renderer for body
 function renderBody(md: string): string {
-  return md
-    .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-8 mb-3">$1</h2>')
-    .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc text-stone-600">$1</li>')
-    .replace(/\n\n/g, '</p><p class="mb-4 text-stone-600 leading-relaxed">')
-    .replace(/^(?!<)(.+)$/gm, '<p class="mb-4 text-stone-600 leading-relaxed">$1</p>');
+  const lines = md.split('\n');
+  let html = '';
+  let inList = false;
+  let inTable = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+
+    if (l.startsWith('### ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+      html += `<h3 class="text-lg font-bold mt-6 mb-2">${l.slice(4)}</h3>`;
+    } else if (l.startsWith('## ')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+      html += `<h2 class="text-xl font-bold mt-8 mb-3 border-b border-stone-200 pb-2">${l.slice(3)}</h2>`;
+    } else if (l.startsWith('---')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+      html += '<hr class="my-6 border-stone-200">';
+    } else if (l.startsWith('|')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (l.includes('---')) continue;
+      const cells = l.split('|').filter((_, i2, a) => i2 > 0 && i2 < a.length - 1).map(c => c.trim());
+      if (!inTable) {
+        html += '<table class="w-full text-sm mb-4 border-collapse"><tbody>';
+        inTable = true;
+      }
+      const isHeader = lines[i + 1]?.includes('---');
+      const tag = isHeader ? 'th' : 'td';
+      const cls = isHeader ? 'font-bold bg-stone-100 text-left px-3 py-2 border border-stone-200' : 'px-3 py-2 border border-stone-200 text-stone-600';
+      html += '<tr>' + cells.map(c => `<${tag} class="${cls}">${c}</${tag}>`).join('') + '</tr>';
+    } else if (l.startsWith('- ') || l.startsWith('* ')) {
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+      if (!inList) { html += '<ul class="list-disc ml-5 mb-4 space-y-1">'; inList = true; }
+      html += `<li class="text-stone-600">${l.slice(2)}</li>`;
+    } else if (l.startsWith('**') && l.endsWith('**')) {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+      html += `<p class="font-bold mt-4 mb-1 text-stone-800">${l.slice(2, -2)}</p>`;
+    } else if (l.trim() === '') {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+    } else {
+      if (inList) { html += '</ul>'; inList = false; }
+      if (inTable) { html += '</tbody></table>'; inTable = false; }
+      const formatted = l.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      html += `<p class="mb-3 text-stone-600 leading-relaxed">${formatted}</p>`;
+    }
+  }
+  if (inList) html += '</ul>';
+  if (inTable) html += '</tbody></table>';
+  return html;
 }
 ---
 
@@ -100,6 +148,12 @@ function renderBody(md: string): string {
                 <dt class="text-stone-400 text-xs">所要時間</dt>
                 <dd class="font-semibold">{duration}</dd>
               </div>
+              {season && (
+                <div>
+                  <dt class="text-stone-400 text-xs">シーズン</dt>
+                  <dd class="font-semibold">{season}</dd>
+                </div>
+              )}
               <div>
                 <dt class="text-stone-400 text-xs">参加人数</dt>
                 <dd class="font-semibold">{min_guests}〜{max_guests}名</dd>
