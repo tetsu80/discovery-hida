@@ -1,12 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { marked } from 'marked';
 
 const homeRaw = await import('../content/pages/home.md?raw');
 const lines = homeRaw.default.split('\n');
-let inFrontmatter = false;
 let fmLines: string[] = [];
-let started = false;
+let started = false; let inFrontmatter = false;
 for (const line of lines) {
   if (line.trim() === '---') {
     if (!started) { started = true; inFrontmatter = true; continue; }
@@ -15,7 +13,6 @@ for (const line of lines) {
   if (inFrontmatter) fmLines.push(line);
 }
 
-// Parse simple YAML frontmatter
 function getField(key: string): string {
   const line = fmLines.find(l => l.startsWith(key + ':'));
   if (!line) return '';
@@ -30,6 +27,10 @@ const feature2_title = getField('feature2_title');
 const feature2_body = getField('feature2_body');
 const feature3_title = getField('feature3_title');
 const feature3_body = getField('feature3_body');
+const testimonial_body = getField('testimonial_body');
+const testimonial_name = getField('testimonial_name');
+const testimonial_title = getField('testimonial_title');
+const hero_image = getField('hero_image');
 
 // Fetch tours
 const tourFiles = import.meta.glob('../content/tours/*.md', { eager: true, query: '?raw', import: 'default' });
@@ -42,7 +43,7 @@ function parseTourFM(raw: string) {
     if (open) fm.push(l);
   }
   const get = (k: string) => { const r = fm.find(l => l.startsWith(k+':')); return r ? r.slice(k.length+1).trim().replace(/^"(.*)"$/,'$1') : ''; };
-  return { title: get('title'), summary: get('summary'), duration: get('duration'), price: get('price'), order: parseInt(get('order')) || 99 };
+  return { title: get('title'), summary: get('summary'), duration: get('duration'), price: get('price'), thumbnail: get('thumbnail'), order: parseInt(get('order')) || 99 };
 }
 
 const tours = Object.entries(tourFiles)
@@ -53,22 +54,42 @@ const tours = Object.entries(tourFiles)
   .sort((a, b) => a.order - b.order);
 ---
 
-<Layout title="Home" description="Discovery Hida — 少人数制・地元ガイドによる飛騨の本物体験">
+<Layout title="Home" description="Discovery Hida — 飛騨地方の魅力を少人数制ガイド付きツアーでご紹介します">
   <!-- Hero -->
-  <section class="relative bg-stone-900 text-white min-h-[80vh] flex items-center justify-center text-center px-4">
-    <div class="max-w-3xl">
-      <p class="text-xs tracking-[0.4em] uppercase text-stone-400 mb-6">Hida, Japan</p>
-      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">{hero_title}</h1>
-      <p class="text-lg text-stone-300 mb-10 max-w-xl mx-auto">{hero_subtitle}</p>
+  <section class="relative bg-stone-900 text-white min-h-[85vh] flex items-end justify-center pb-16 px-4" style={hero_image ? `background-image:url(${hero_image});background-size:cover;background-position:center;` : ''}>
+    {hero_image && <div class="absolute inset-0 bg-black/50"></div>}
+    <div class="relative z-10 text-center max-w-3xl">
+      <div class="mb-8">
+        <svg width="80" height="80" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 opacity-90">
+          <path d="M18 4L32 28H4L18 4Z" fill="none" stroke="white" stroke-width="2"/>
+          <path d="M18 10L28 26H8L18 10Z" fill="none" stroke="white" stroke-width="1.2"/>
+          <line x1="4" y1="28" x2="32" y2="28" stroke="white" stroke-width="2"/>
+        </svg>
+        <p class="text-xs tracking-[0.5em] uppercase text-white/70 mb-2">DISCOVERY</p>
+        <p class="text-3xl font-bold tracking-[0.4em] uppercase">HIDA</p>
+      </div>
+      <p class="text-stone-300 leading-relaxed max-w-2xl mx-auto mb-10">{hero_subtitle}</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/tours" class="bg-white text-stone-900 px-8 py-3 font-semibold tracking-wide hover:bg-stone-200 transition-colors">View Tours</a>
-        <a href="/contact" class="border border-white text-white px-8 py-3 font-semibold tracking-wide hover:bg-white hover:text-stone-900 transition-colors">Contact Us</a>
+        <a href="/tours" class="bg-white text-stone-900 px-8 py-3 font-semibold tracking-wide hover:bg-stone-200 transition-colors">ツアーを見る</a>
+        <a href="/contact" class="border border-white text-white px-8 py-3 font-semibold tracking-wide hover:bg-white hover:text-stone-900 transition-colors">お問い合わせ</a>
       </div>
     </div>
   </section>
 
+  <!-- Intro text -->
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-stone-700 leading-relaxed text-lg">
+        <strong>DISCOVER HIDA</strong>は、雄大な山々と豊かな自然環境に恵まれた飛騨地方の魅力を余すところなくご紹介します。飛騨地方は、高山、白川郷、古川など、独自の伝統と文化を持つ町や村でも知られています。少人数制のガイド付きツアーでは、日本の田園地帯に隠された魅力的なスポットをじっくりと巡り、一生忘れられない思い出を作ることができます。
+      </p>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="border-t border-stone-200 mx-4 md:mx-20"></div>
+
   <!-- Features -->
-  <section class="py-20 px-4">
+  <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-xs tracking-[0.4em] uppercase text-stone-400 text-center mb-12">Why Discovery Hida</h2>
       <div class="grid md:grid-cols-3 gap-12">
@@ -89,31 +110,56 @@ const tours = Object.entries(tourFiles)
   <!-- Divider -->
   <div class="border-t border-stone-200 mx-4 md:mx-20"></div>
 
-  <!-- Tours preview -->
-  <section class="py-20 px-4">
+  <!-- Tours lineup -->
+  <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-xs tracking-[0.4em] uppercase text-stone-400 text-center mb-12">Our Tours</h2>
+      <div class="bg-stone-900 text-white text-center py-4 mb-12">
+        <h2 class="text-lg font-bold tracking-widest uppercase">ツアーラインナップ</h2>
+      </div>
       <div class="grid md:grid-cols-2 gap-8">
         {tours.map(t => (
-          <a href={`/tours/${t.slug}`} class="group border border-stone-200 p-8 hover:border-stone-800 transition-colors">
-            <p class="text-xs tracking-widest uppercase text-stone-400 mb-3">{t.duration} · {t.price}</p>
-            <h3 class="text-xl font-bold mb-3 group-hover:underline">{t.title}</h3>
-            <p class="text-stone-500 text-sm leading-relaxed">{t.summary}</p>
-          </a>
+          <div class="group">
+            <div class="aspect-video bg-stone-100 mb-4 overflow-hidden flex items-center justify-center">
+              {t.thumbnail
+                ? <img src={t.thumbnail} alt={t.title} class="w-full h-full object-cover" />
+                : <span class="text-stone-300 text-xs">写真準備中</span>
+              }
+            </div>
+            <h3 class="text-lg font-bold mb-3">{t.title}</h3>
+            <p class="text-stone-500 text-sm leading-relaxed mb-4">{t.summary}</p>
+            <a href={`/tours/${t.slug}`} class="inline-block border border-stone-800 text-stone-800 px-6 py-2 text-sm font-semibold hover:bg-stone-800 hover:text-white transition-colors">詳細はこちら</a>
+          </div>
         ))}
-      </div>
-      <div class="text-center mt-12">
-        <a href="/tours" class="border border-stone-800 text-stone-800 px-8 py-3 font-semibold tracking-wide hover:bg-stone-800 hover:text-white transition-colors">All Tours</a>
       </div>
     </div>
   </section>
+
+  <!-- Testimonials -->
+  {testimonial_body && (
+    <section class="py-16 px-4 bg-stone-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="bg-stone-900 text-white text-center py-4 mb-12">
+          <h2 class="text-lg font-bold tracking-widest uppercase">お客様の声</h2>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <blockquote class="border border-stone-200 bg-white p-8 text-stone-600 leading-relaxed text-sm italic">
+            {testimonial_body}
+          </blockquote>
+          <div class="mt-4 pl-2">
+            <p class="font-bold text-stone-800">{testimonial_name}</p>
+            <p class="text-stone-500 text-sm">{testimonial_title}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- CTA -->
   <section class="bg-stone-900 text-white py-20 px-4 text-center">
     <div class="max-w-2xl mx-auto">
       <h2 class="text-3xl font-bold mb-4">Ready to Discover Hida?</h2>
       <p class="text-stone-400 mb-8">少人数制のツアーで、飛騨の本物に出会ってください。</p>
-      <a href="/contact" class="bg-white text-stone-900 px-8 py-3 font-semibold hover:bg-stone-200 transition-colors">Get in Touch</a>
+      <a href="/contact" class="bg-white text-stone-900 px-8 py-3 font-semibold hover:bg-stone-200 transition-colors">お問い合わせ</a>
     </div>
   </section>
 </Layout>
