@@ -1,17 +1,24 @@
 ---
 title: "About Us"
 welcome_body: |
-  Our passion is enhancing your Japanese travel experience through informative and entertaining tours, rich in what you might miss out on as an independent traveller. The Hida region has a myriad of unique sights and experiences, not all easily accessible to the unguided. We aim to open the doors on authentic rural Japan.
+  Our passion is enhancing your Japanese travel experience through informative and entertaining tours, rich in what you might miss out on as an independent traveller. The Hida region has a myriad of unique sights and experiences, not all easily accessible to the unguided. We aim to open the doors on authentic rural Japan, whether through interaction with local people, or providing insight into local culture and traditions, or showcasing nature and its rhythms in the impressive Hida landscape.
 guide_name: "Hisa Matsuo"
+guide_title: "Owner and guide of DISCOVERY HIDA"
 guide_photo: "/images/guide.jpg"
 guide_bio: |
-  飛騨で生まれ育ったHisa Matsuoは、この地域への深い愛着と豊富な知識を持つ通訳案内士です。国際的な旅行者が飛騨の本質を体験できるよう、独自のツアーを企画・運営しています。
+  Originally from Tokyo, I began my guiding career in New Zealand, qualifying in Adventure Tourism before working as a guide on the Milford Track. After a few years, my focus changed: I began to think about using the skills I had gained, both in terms of language and guiding, to promote understanding of my own country, Japan, to visitors from overseas.
 
-  準備万端で組織力があり、知識も豊富で、気さくな人柄で、観光客向けのプログラムを企画する能力を存分に発揮。外国人旅行者が日本と日本文化への理解を深められるよう、情熱と献身をもってサポートしています。
+  So I moved to the Hida region in 2010, attracted by its history, cultural traditions, wonderful food, scenery and wildlife. In my role as activity manager for SATOYAMA EXPERIENCE, I worked within a team to establish the business from its outset, developing all tours and operations to the point where it now attracts nearly 4,000 visitors each year.
+
+  Having gained a wealth of experience and knowledge over nine years of working as both manager and head guide, I have recently set up my own tour company, keen to take visitors to places they may otherwise miss and provide experiences they may not otherwise have.
 qualifications:
-  - "全国通訳案内士（英語）"
-  - "日本赤十字社 救急法救急員"
-  - "飛騨地域観光ガイド認定"
+  - "Wilderness Advanced First Aid – Wilderness Medical Associates"
+  - "National Government Licensed Guide Interpreter"
+  - "Nature Guide Stage 2 – Japan Mountain Guide Association"
+  - "Certified Interpretative Guide – National Association for Interpretation"
+  - "International Kikisakeshi – SSI International"
+  - "New Zealand Snowsports Instructor Alliance – Ski Instructor Level 1"
+  - "Otago Polytechnic – Avalanche Safety Management Stage 1"
 hida_passion: |
-  飛騨の四季、食、祭り、そして人々——この豊かさを世界中の旅人に伝えることが私の使命です。一度訪れた方がまた帰ってきたくなる、そんな体験を届けたいと思っています。
+  Keen to take visitors to places they may otherwise miss and provide experiences they may not otherwise have.
 ---
