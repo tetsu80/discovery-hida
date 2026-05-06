@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const tourFiles = import.meta.glob('../../content/tours/*.md', { eager: true, query: '?raw', import: 'default' });
+
+function parseTourFM(raw: string) {
+  const ls = raw.split('\n');
+  let fm: string[] = []; let s = false; let open = false;
+  for (const l of ls) {
+    if (l.trim() === '---') { if (!s) { s = true; open = true; continue; } if (open) { open = false; continue; } }
+    if (open) fm.push(l);
+  }
+  const get = (k: string) => { const r = fm.find(l => l.startsWith(k+':')); return r ? r.slice(k.length+1).trim().replace(/^"(.*)"$/,'$1') : ''; };
+  return { title: get('title'), summary: get('summary'), duration: get('duration'), price: get('price'), max_guests: get('max_guests'), thumbnail: get('thumbnail'), order: parseInt(get('order')) || 99 };
+}
+
+const tours = Object.entries(tourFiles)
+  .map(([path, raw]) => {
+    const slug = path.split('/').pop()!.replace('.md', '');
+    return { slug, ...parseTourFM(raw as string) };
+  })
+  .sort((a, b) => a.order - b.order);
+---
+
+<Layout title="Tours" description="Discovery Hidaのツアー一覧">
+  <section class="bg-stone-900 text-white py-24 px-4 text-center">
+    <h1 class="text-5xl md:text-6xl font-bold tracking-tight">TOURS</h1>
+    <p class="mt-4 text-stone-400 text-sm tracking-widest">少人数制・飛騨の本物体験</p>
+  </section>
+
+  <section class="py-20 px-4">
+    <div class="max-w-5xl mx-auto space-y-8">
+      {tours.map(t => (
+        <a href={`/tours/${t.slug}`} class="group grid md:grid-cols-3 gap-0 border border-stone-200 hover:border-stone-800 transition-colors overflow-hidden">
+          <div class="aspect-video md:aspect-auto bg-stone-100 flex items-center justify-center">
+            {t.thumbnail
+              ? <img src={t.thumbnail} alt={t.title} class="w-full h-full object-cover" />
+              : <span class="text-stone-300 text-xs">No image</span>
+            }
+          </div>
+          <div class="md:col-span-2 p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap gap-4 text-xs tracking-widest uppercase text-stone-400 mb-4">
+                <span>{t.duration}</span>
+                <span>·</span>
+                <span>Max {t.max_guests} guests</span>
+              </div>
+              <h2 class="text-2xl font-bold mb-3 group-hover:underline">{t.title}</h2>
+              <p class="text-stone-500 text-sm leading-relaxed">{t.summary}</p>
+            </div>
+            <div class="mt-6 flex items-center justify-between">
+              <span class="text-lg font-bold">{t.price}</span>
+              <span class="text-xs tracking-widest uppercase text-stone-800 border-b border-stone-800 pb-0.5">View Details →</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-stone-50 py-16 px-4 text-center">
+    <p class="text-stone-600 mb-6">ご不明な点はお気軽にお問い合わせください。</p>
+    <a href="/contact" class="bg-stone-900 text-white px-8 py-3 font-semibold hover:bg-stone-700 transition-colors">Contact Us</a>
+  </section>
+</Layout>

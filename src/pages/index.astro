@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { marked } from 'marked';
+
+const homeRaw = await import('../content/pages/home.md?raw');
+const lines = homeRaw.default.split('\n');
+let inFrontmatter = false;
+let fmLines: string[] = [];
+let started = false;
+for (const line of lines) {
+  if (line.trim() === '---') {
+    if (!started) { started = true; inFrontmatter = true; continue; }
+    if (inFrontmatter) { inFrontmatter = false; continue; }
+  }
+  if (inFrontmatter) fmLines.push(line);
+}
+
+// Parse simple YAML frontmatter
+function getField(key: string): string {
+  const line = fmLines.find(l => l.startsWith(key + ':'));
+  if (!line) return '';
+  return line.slice(key.length + 1).trim().replace(/^"(.*)"$/, '$1');
+}
+
+const hero_title = getField('hero_title');
+const hero_subtitle = getField('hero_subtitle');
+const feature1_title = getField('feature1_title');
+const feature1_body = getField('feature1_body');
+const feature2_title = getField('feature2_title');
+const feature2_body = getField('feature2_body');
+const feature3_title = getField('feature3_title');
+const feature3_body = getField('feature3_body');
+
+// Fetch tours
+const tourFiles = import.meta.glob('../content/tours/*.md', { eager: true, query: '?raw', import: 'default' });
+
+function parseTourFM(raw: string) {
+  const ls = raw.split('\n');
+  let fm: string[] = []; let s = false; let open = false;
+  for (const l of ls) {
+    if (l.trim() === '---') { if (!s) { s = true; open = true; continue; } if (open) { open = false; continue; } }
+    if (open) fm.push(l);
+  }
+  const get = (k: string) => { const r = fm.find(l => l.startsWith(k+':')); return r ? r.slice(k.length+1).trim().replace(/^"(.*)"$/,'$1') : ''; };
+  return { title: get('title'), summary: get('summary'), duration: get('duration'), price: get('price'), order: parseInt(get('order')) || 99 };
+}
+
+const tours = Object.entries(tourFiles)
+  .map(([path, raw]) => {
+    const slug = path.split('/').pop()!.replace('.md', '');
+    return { slug, ...parseTourFM(raw as string) };
+  })
+  .sort((a, b) => a.order - b.order);
+---
+
+<Layout title="Home" description="Discovery Hida — 少人数制・地元ガイドによる飛騨の本物体験">
+  <!-- Hero -->
+  <section class="relative bg-stone-900 text-white min-h-[80vh] flex items-center justify-center text-center px-4">
+    <div class="max-w-3xl">
+      <p class="text-xs tracking-[0.4em] uppercase text-stone-400 mb-6">Hida, Japan</p>
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">{hero_title}</h1>
+      <p class="text-lg text-stone-300 mb-10 max-w-xl mx-auto">{hero_subtitle}</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/tours" class="bg-white text-stone-900 px-8 py-3 font-semibold tracking-wide hover:bg-stone-200 transition-colors">View Tours</a>
+        <a href="/contact" class="border border-white text-white px-8 py-3 font-semibold tracking-wide hover:bg-white hover:text-stone-900 transition-colors">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xs tracking-[0.4em] uppercase text-stone-400 text-center mb-12">Why Discovery Hida</h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        {[
+          { title: feature1_title, body: feature1_body },
+          { title: feature2_title, body: feature2_body },
+          { title: feature3_title, body: feature3_body },
+        ].map(f => (
+          <div class="text-center">
+            <h3 class="text-lg font-bold mb-4">{f.title}</h3>
+            <p class="text-stone-500 leading-relaxed text-sm">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="border-t border-stone-200 mx-4 md:mx-20"></div>
+
+  <!-- Tours preview -->
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-xs tracking-[0.4em] uppercase text-stone-400 text-center mb-12">Our Tours</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {tours.map(t => (
+          <a href={`/tours/${t.slug}`} class="group border border-stone-200 p-8 hover:border-stone-800 transition-colors">
+            <p class="text-xs tracking-widest uppercase text-stone-400 mb-3">{t.duration} · {t.price}</p>
+            <h3 class="text-xl font-bold mb-3 group-hover:underline">{t.title}</h3>
+            <p class="text-stone-500 text-sm leading-relaxed">{t.summary}</p>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-12">
+        <a href="/tours" class="border border-stone-800 text-stone-800 px-8 py-3 font-semibold tracking-wide hover:bg-stone-800 hover:text-white transition-colors">All Tours</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-stone-900 text-white py-20 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Ready to Discover Hida?</h2>
+      <p class="text-stone-400 mb-8">少人数制のツアーで、飛騨の本物に出会ってください。</p>
+      <a href="/contact" class="bg-white text-stone-900 px-8 py-3 font-semibold hover:bg-stone-200 transition-colors">Get in Touch</a>
+    </div>
+  </section>
+</Layout>

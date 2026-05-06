@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: #292524;
+    background: #fff;
+    font-family: sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+}

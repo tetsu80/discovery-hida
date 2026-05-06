@@ -1,0 +1,82 @@
+backend:
+  name: github
+  repo: tetsu80/discovery-hida
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+locale: ja
+
+collections:
+  - name: pages
+    label: ページ設定
+    files:
+      - name: home
+        label: ホームページ
+        file: src/content/pages/home.md
+        fields:
+          - { label: ヒーローキャッチコピー, name: hero_title, widget: string }
+          - { label: ヒーローサブタイトル, name: hero_subtitle, widget: string }
+          - { label: ヒーロー画像, name: hero_image, widget: image, required: false }
+          - { label: 強み①タイトル, name: feature1_title, widget: string }
+          - { label: 強み①内容, name: feature1_body, widget: text }
+          - { label: 強み②タイトル, name: feature2_title, widget: string }
+          - { label: 強み②内容, name: feature2_body, widget: text }
+          - { label: 強み③タイトル, name: feature3_title, widget: string }
+          - { label: 強み③内容, name: feature3_body, widget: text }
+
+      - name: about
+        label: About Usページ
+        file: src/content/pages/about.md
+        fields:
+          - { label: ページタイトル, name: title, widget: string }
+          - { label: ようこそのメッセージ, name: welcome_body, widget: markdown }
+          - { label: ガイド名, name: guide_name, widget: string }
+          - { label: ガイドプロフィール写真, name: guide_photo, widget: image, required: false }
+          - { label: ガイドの経歴・想い, name: guide_bio, widget: markdown }
+          - label: 資格リスト
+            name: qualifications
+            widget: list
+            field: { label: 資格, name: item, widget: string }
+          - { label: 飛騨への想い, name: hida_passion, widget: markdown }
+
+      - name: faq
+        label: FAQページ
+        file: src/content/pages/faq.md
+        fields:
+          - label: よくある質問
+            name: faqs
+            widget: list
+            fields:
+              - { label: 質問, name: question, widget: string }
+              - { label: 回答, name: answer, widget: text }
+
+      - name: contact
+        label: お問い合わせページ
+        file: src/content/pages/contact.md
+        fields:
+          - { label: メールアドレス, name: email, widget: string }
+          - { label: LINE URL, name: line_url, widget: string, required: false }
+          - { label: お問い合わせの案内文, name: intro, widget: text }
+
+  - name: tours
+    label: ツアー
+    folder: src/content/tours
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: ツアー名, name: title, widget: string }
+      - { label: サムネイル画像, name: thumbnail, widget: image, required: false }
+      - { label: 所要時間, name: duration, widget: string }
+      - { label: 料金, name: price, widget: string }
+      - { label: 最少催行人数, name: min_guests, widget: string }
+      - { label: 最大催行人数, name: max_guests, widget: string }
+      - { label: 集合場所, name: meeting_point, widget: string }
+      - { label: ツアー概要, name: summary, widget: text }
+      - { label: 詳細説明（行程など）, name: body, widget: markdown }
+      - label: 持ち物リスト
+        name: what_to_bring
+        widget: list
+        field: { label: 持ち物, name: item, widget: string }
+      - { label: 掲載順, name: order, widget: number, default: 1 }

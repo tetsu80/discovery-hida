@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const raw = await import('../content/pages/about.md?raw');
+const lines = raw.default.split('\n');
+let fm: string[] = []; let s = false; let open = false;
+for (const l of lines) {
+  if (l.trim() === '---') { if (!s) { s = true; open = true; continue; } if (open) { open = false; continue; } }
+  if (open) fm.push(l);
+}
+const get = (k: string) => { const r = fm.find(l => l.startsWith(k+':')); return r ? r.slice(k.length+1).trim().replace(/^"(.*)"$/,'$1') : ''; };
+
+const guide_name = get('guide_name');
+const guide_photo = get('guide_photo');
+
+// Parse block scalar fields (|)
+function getBlock(key: string): string {
+  const idx = fm.findIndex(l => l.startsWith(key + ': |') || l.trim() === key + ': |');
+  if (idx < 0) return '';
+  let result = '';
+  for (let i = idx + 1; i < fm.length; i++) {
+    const l = fm[i];
+    if (l.match(/^\S/) || l.trim() === '') break;
+    result += l.trim() + '\n';
+  }
+  return result.trim();
+}
+
+// Parse qualifications list
+function getList(): string[] {
+  const idx = fm.findIndex(l => l.startsWith('qualifications:'));
+  if (idx < 0) return [];
+  const items: string[] = [];
+  for (let i = idx + 1; i < fm.length; i++) {
+    const l = fm[i];
+    if (!l.startsWith('  -')) break;
+    items.push(l.replace(/^\s+-\s+/, '').replace(/^"(.*)"$/, '$1'));
+  }
+  return items;
+}
+
+const welcome = getBlock('welcome_body');
+const guide_bio = getBlock('guide_bio');
+const hida_passion = getBlock('hida_passion');
+const qualifications = getList();
+---
+
+<Layout title="About Us" description="Discovery Hidaのガイド、Hisa Matsuoについて">
+  <!-- Hero banner -->
+  <section class="bg-stone-900 text-white py-24 px-4 text-center">
+    <h1 class="text-5xl md:text-6xl font-bold tracking-tight">ABOUT US</h1>
+  </section>
+
+  <!-- Welcome -->
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Welcome to DISCOVERY HIDA</h2>
+      <p class="text-stone-600 leading-relaxed">{welcome}</p>
+    </div>
+  </section>
+
+  <!-- Guide section -->
+  <div class="bg-stone-50">
+    <section class="py-20 px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="bg-stone-900 text-white text-center py-4 mb-12">
+          <h2 class="text-xl font-bold tracking-widest uppercase">About Our Guide</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <!-- Photo -->
+          <div class="aspect-[3/4] bg-stone-200 flex items-center justify-center">
+            {guide_photo
+              ? <img src={guide_photo} alt={guide_name} class="w-full h-full object-cover" />
+              : <span class="text-stone-400 text-sm">Photo coming soon</span>
+            }
+          </div>
+          <!-- Bio -->
+          <div>
+            <h3 class="text-3xl font-bold mb-6">{guide_name}</h3>
+            <div class="text-stone-600 leading-relaxed mb-8 whitespace-pre-line">{guide_bio}</div>
+            <!-- Qualifications -->
+            <h4 class="text-xs tracking-[0.3em] uppercase text-stone-400 mb-4">Qualifications</h4>
+            <ul class="space-y-2">
+              {qualifications.map(q => (
+                <li class="flex items-start gap-3 text-sm text-stone-700">
+                  <span class="mt-1 w-1.5 h-1.5 bg-stone-800 rounded-full flex-shrink-0"></span>
+                  {q}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Passion for Hida -->
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-xs tracking-[0.4em] uppercase text-stone-400 mb-6">Our Passion</h2>
+      <p class="text-stone-600 leading-relaxed text-lg whitespace-pre-line">{hida_passion}</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-stone-900 text-white py-16 px-4 text-center">
+    <h2 class="text-2xl font-bold mb-4">Ready to join a tour?</h2>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+      <a href="/tours" class="bg-white text-stone-900 px-8 py-3 font-semibold hover:bg-stone-200 transition-colors">View Tours</a>
+      <a href="/contact" class="border border-white text-white px-8 py-3 font-semibold hover:bg-white hover:text-stone-900 transition-colors">Contact Us</a>
+    </div>
+  </section>
+</Layout>
