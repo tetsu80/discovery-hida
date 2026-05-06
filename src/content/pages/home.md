@@ -1,7 +1,7 @@
 ---
 hero_title: "Discover the Real Hida"
-hero_subtitle: "雄大な山々と豊かな自然環境に恵まれた飛騨地方の魅力を、少人数制ガイド付きツアーでご紹介します。"
-hero_image: ""
+hero_subtitle: "雄大な山々と豊かな自然環境に恵まれた飛騨地方の魅力を余すところなくご紹介します。少人数制のガイド付きツアーで、一生忘れられない思い出を。"
+hero_image: "/images/hero.jpg"
 feature1_title: "少人数制ツアー"
 feature1_body: "少人数制のガイド付きツアーでは、日本の田園地帯に隠された魅力的なスポットをじっくりと巡り、一生忘れられない思い出を作ることができます。"
 feature2_title: "飛騨の文化と自然"

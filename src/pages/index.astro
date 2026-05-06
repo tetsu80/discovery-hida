@@ -30,7 +30,7 @@ const feature3_body = getField('feature3_body');
 const testimonial_body = getField('testimonial_body');
 const testimonial_name = getField('testimonial_name');
 const testimonial_title = getField('testimonial_title');
-const hero_image = getField('hero_image');
+const hero_image = getField('hero_image') || '/images/hero.jpg';
 
 // Fetch tours
 const tourFiles = import.meta.glob('../content/tours/*.md', { eager: true, query: '?raw', import: 'default' });
@@ -56,8 +56,8 @@ const tours = Object.entries(tourFiles)
 
 <Layout title="Home" description="Discovery Hida — 飛騨地方の魅力を少人数制ガイド付きツアーでご紹介します">
   <!-- Hero -->
-  <section class="relative bg-stone-900 text-white min-h-[85vh] flex items-end justify-center pb-16 px-4" style={hero_image ? `background-image:url(${hero_image});background-size:cover;background-position:center;` : ''}>
-    {hero_image && <div class="absolute inset-0 bg-black/50"></div>}
+  <section class="relative bg-stone-900 text-white min-h-[85vh] flex items-end justify-center pb-16 px-4">
+    {hero_image && <img src={hero_image} alt="飛騨の風景" class="absolute inset-0 w-full h-full object-cover opacity-60" />}
     <div class="relative z-10 text-center max-w-3xl">
       <div class="mb-8">
         <svg width="80" height="80" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 opacity-90">

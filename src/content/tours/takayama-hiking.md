@@ -1,6 +1,6 @@
 ---
 title: "高山ハイキング＆田舎暮らしツアー"
-thumbnail: ""
+thumbnail: "/images/tour-hiking.jpg"
 duration: "約6時間"
 price: "お問い合わせください"
 min_guests: "2"

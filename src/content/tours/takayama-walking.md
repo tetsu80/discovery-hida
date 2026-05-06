@@ -1,6 +1,6 @@
 ---
 title: "高山半日ウォーキングツアー"
-thumbnail: ""
+thumbnail: "/images/tour-walking.jpg"
 duration: "約4時間"
 price: "お問い合わせください"
 min_guests: "1"
