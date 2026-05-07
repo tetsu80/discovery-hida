@@ -61,25 +61,19 @@ const tours = Object.entries(tourFiles)
     <div class="relative z-10 text-center max-w-3xl">
       <div class="mb-8">
         <!-- ヒーロー用ロゴマーク（大サイズ） -->
-        <svg width="90" height="90" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 opacity-95">
-          <!-- 外側ダイヤモンド -->
-          <path d="M40 3 L77 40 L40 77 L3 40 Z" stroke="white" stroke-width="2"/>
-          <!-- 内側ダイヤモンド -->
-          <path d="M40 18 L58 40 L40 62 L22 40 Z" stroke="white" stroke-width="1.5"/>
-          <!-- 上の連結線 -->
-          <line x1="40" y1="3" x2="40" y2="18" stroke="white" stroke-width="2"/>
-          <!-- 右の連結線 -->
-          <line x1="77" y1="40" x2="58" y2="40" stroke="white" stroke-width="2"/>
-          <!-- 下の連結線 -->
-          <line x1="40" y1="62" x2="40" y2="77" stroke="white" stroke-width="2"/>
-          <!-- 左の連結線 -->
-          <line x1="3" y1="40" x2="22" y2="40" stroke="white" stroke-width="2"/>
-          <!-- 内側上部の横ライン -->
-          <line x1="29" y1="29" x2="51" y2="29" stroke="white" stroke-width="1.2"/>
-          <!-- 内側中央の横ライン -->
-          <line x1="22" y1="40" x2="58" y2="40" stroke="white" stroke-width="1.2"/>
-          <!-- 内側下部の横ライン -->
-          <line x1="29" y1="51" x2="51" y2="51" stroke="white" stroke-width="1.2"/>
+        <svg width="90" height="100" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 opacity-95">
+          <!-- 上部装飾：縦長ダイヤモンド -->
+          <path d="M45 2 L57 20 L45 38 L33 20 Z" stroke="white" stroke-width="2"/>
+          <!-- 上部装飾：横長ダイヤモンド（交差） -->
+          <path d="M18 20 L45 10 L72 20 L45 30 Z" stroke="white" stroke-width="2"/>
+          <!-- 建物本体（長方形） -->
+          <rect x="9" y="38" width="72" height="56" stroke="white" stroke-width="2"/>
+          <!-- 横ライン1 -->
+          <line x1="9" y1="53" x2="81" y2="53" stroke="white" stroke-width="1.5"/>
+          <!-- 横ライン2 -->
+          <line x1="9" y1="68" x2="81" y2="68" stroke="white" stroke-width="1.5"/>
+          <!-- 横ライン3 -->
+          <line x1="9" y1="83" x2="81" y2="83" stroke="white" stroke-width="1.5"/>
         </svg>
         <p class="text-xs tracking-[0.5em] uppercase text-white/70 mb-2">DISCOVERY</p>
         <p class="text-3xl font-bold tracking-[0.4em] uppercase">HIDA</p>
