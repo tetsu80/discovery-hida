@@ -25,11 +25,24 @@ const siteName = 'DISCOVERY HIDA';
     <header class="fixed top-0 left-0 right-0 z-50 bg-stone-900 text-white">
       <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         <a href="/" class="flex items-center gap-3">
+          <!-- ロゴマーク（ナビ用・小サイズ） -->
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="36" height="36" fill="none"/>
-            <path d="M18 4L32 28H4L18 4Z" fill="none" stroke="white" stroke-width="2"/>
-            <path d="M18 10L28 26H8L18 10Z" fill="none" stroke="white" stroke-width="1.2"/>
-            <line x1="4" y1="28" x2="32" y2="28" stroke="white" stroke-width="2"/>
+            <!-- 外側ダイヤモンド -->
+            <path d="M18 2 L34 18 L18 34 L2 18 Z" stroke="white" stroke-width="1.6"/>
+            <!-- 内側ダイヤモンド -->
+            <path d="M18 9 L27 18 L18 27 L9 18 Z" stroke="white" stroke-width="1.2"/>
+            <!-- 上の連結線 -->
+            <line x1="18" y1="2" x2="18" y2="9" stroke="white" stroke-width="1.6"/>
+            <!-- 右の連結線 -->
+            <line x1="34" y1="18" x2="27" y2="18" stroke="white" stroke-width="1.6"/>
+            <!-- 下の連結線 -->
+            <line x1="18" y1="27" x2="18" y2="34" stroke="white" stroke-width="1.6"/>
+            <!-- 左の連結線 -->
+            <line x1="2" y1="18" x2="9" y2="18" stroke="white" stroke-width="1.6"/>
+            <!-- 内側上部の横ライン -->
+            <line x1="13" y1="13" x2="23" y2="13" stroke="white" stroke-width="1"/>
+            <!-- 内側下部の横ライン -->
+            <line x1="13" y1="23" x2="23" y2="23" stroke="white" stroke-width="1"/>
           </svg>
           <span class="text-sm font-bold tracking-[0.25em] uppercase">Discovery Hida</span>
         </a>
