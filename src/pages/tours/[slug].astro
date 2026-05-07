@@ -121,7 +121,7 @@ function renderBody(md: string): string {
 
   <section class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
-      <!-- Tour image -->
+      <!-- ツアー画像 -->
       {thumbnail && (
         <div class="aspect-video bg-stone-100 mb-12 overflow-hidden">
           <img src={thumbnail} alt={title} class="w-full h-full object-cover" />
@@ -129,13 +129,13 @@ function renderBody(md: string): string {
       )}
 
       <div class="grid md:grid-cols-3 gap-12">
-        <!-- Main content -->
+        <!-- メインコンテンツ -->
         <div class="md:col-span-2">
           <p class="text-lg text-stone-600 leading-relaxed mb-8">{summary}</p>
           <div set:html={renderBody(body)} />
         </div>
 
-        <!-- Sidebar -->
+        <!-- サイドバー -->
         <div class="space-y-6">
           <div class="border border-stone-200 p-6">
             <h3 class="text-xs tracking-[0.3em] uppercase text-stone-400 mb-4">Tour Info</h3>
