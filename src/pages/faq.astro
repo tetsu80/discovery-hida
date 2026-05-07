@@ -9,7 +9,11 @@ for (const l of lines) {
   if (open) fm.push(l);
 }
 
-// Parse FAQ list
+const get = (k: string) => { const r = fm.find(l => l.startsWith(k+':')); return r ? r.slice(k.length+1).trim().replace(/^"(.*)"$/,'$1') : ''; };
+const title = get('title') || 'FAQ';
+const subtitle = get('subtitle') || 'よくあるご質問';
+
+// Parse FAQ list supporting both inline and block scalar (|) answers
 const faqs: { question: string; answer: string }[] = [];
 const faqsIdx = fm.findIndex(l => l.startsWith('faqs:'));
 if (faqsIdx >= 0) {
@@ -18,11 +22,28 @@ if (faqsIdx >= 0) {
     if (fm[i].startsWith('  - question:')) {
       const question = fm[i].replace(/^\s+-\s+question:\s+/, '').replace(/^"(.*)"$/, '$1');
       let answer = '';
-      if (i + 1 < fm.length && fm[i+1].trim().startsWith('answer:')) {
-        answer = fm[i+1].replace(/^\s+answer:\s+/, '').replace(/^"(.*)"$/, '$1');
+      if (i + 1 < fm.length) {
+        const answerLine = fm[i + 1];
+        if (answerLine.trim() === 'answer: |' || answerLine.trim().startsWith('answer: |')) {
+          // Block scalar: collect indented lines
+          let j = i + 2;
+          const parts: string[] = [];
+          while (j < fm.length && (fm[j].length === 0 || fm[j].startsWith('    '))) {
+            parts.push(fm[j].trim());
+            j++;
+          }
+          answer = parts.join('\n').trim();
+          i = j;
+        } else if (answerLine.trim().startsWith('answer:')) {
+          answer = answerLine.replace(/^\s+answer:\s+/, '').replace(/^"(.*)"$/, '$1');
+          i += 2;
+        } else {
+          i++;
+        }
+      } else {
+        i++;
       }
       faqs.push({ question, answer });
-      i += 2;
     } else {
       i++;
     }
@@ -30,10 +51,10 @@ if (faqsIdx >= 0) {
 }
 ---
 
-<Layout title="FAQ" description="よくある質問 — Discovery Hida">
+<Layout title={title} description={`${title} — Discovery Hida`}>
   <section class="bg-stone-900 text-white py-24 px-4 text-center">
-    <h1 class="text-5xl md:text-6xl font-bold tracking-tight">FAQ</h1>
-    <p class="mt-4 text-stone-400 text-sm tracking-widest">よくあるご質問</p>
+    <h1 class="text-5xl md:text-6xl font-bold tracking-tight">{title}</h1>
+    <p class="mt-4 text-stone-400 text-sm tracking-widest">{subtitle}</p>
   </section>
 
   <section class="py-20 px-4">
@@ -44,14 +65,14 @@ if (faqsIdx >= 0) {
             {faq.question}
             <span class="ml-4 flex-shrink-0 text-stone-400 group-open:rotate-180 transition-transform">▼</span>
           </summary>
-          <p class="mt-4 text-stone-600 leading-relaxed text-sm">{faq.answer}</p>
+          <div class="mt-4 text-stone-600 leading-relaxed text-sm whitespace-pre-line">{faq.answer}</div>
         </details>
       ))}
     </div>
   </section>
 
   <section class="bg-stone-50 py-16 px-4 text-center">
-    <p class="text-stone-600 mb-6">他にご質問がございましたらお気軽にどうぞ。</p>
-    <a href="/contact" class="bg-stone-900 text-white px-8 py-3 font-semibold hover:bg-stone-700 transition-colors">Contact Us</a>
+    <p class="text-stone-600 mb-6">他にご質問はありますか？</p>
+    <a href="/contact" class="bg-stone-900 text-white px-8 py-3 font-semibold hover:bg-stone-700 transition-colors">お問い合わせ</a>
   </section>
 </Layout>
