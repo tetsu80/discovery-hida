@@ -18,6 +18,10 @@ const siteName = 'DISCOVERY HIDA';
     <meta name="description" content={description} />
     <title>{title} | {siteName}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Google Fonts: ピクセル系等幅フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
@@ -25,18 +29,22 @@ const siteName = 'DISCOVERY HIDA';
     <header class="fixed top-0 left-0 right-0 z-50 bg-stone-900 text-white">
       <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         <a href="/" class="flex items-center gap-3">
-          <!-- ロゴマーク（ナビ用・小サイズ） -->
-          <svg width="38" height="40" viewBox="0 0 38 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- 上部装飾：縦長ダイヤモンド -->
-            <path d="M19 1 L25 9 L19 16 L13 9 Z" stroke="white" stroke-width="1.6"/>
-            <!-- 上部装飾：横長ダイヤモンド（交差） -->
-            <path d="M7 9 L19 5 L31 9 L19 13 Z" stroke="white" stroke-width="1.6"/>
-            <!-- 建物本体（長方形） -->
-            <rect x="4" y="16" width="30" height="23" stroke="white" stroke-width="1.6"/>
-            <!-- 横ライン1 -->
-            <line x1="4" y1="22" x2="34" y2="22" stroke="white" stroke-width="1.2"/>
-            <!-- 横ライン2 -->
-            <line x1="4" y1="29" x2="34" y2="29" stroke="white" stroke-width="1.2"/>
+          <!-- ロゴマーク（ナビ用） -->
+          <svg width="36" height="41" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 千木（左X）：外側ビーム 右上→左下 -->
+            <line x1="44" y1="4" x2="10" y2="64" stroke="white" stroke-width="12"/>
+            <!-- 千木（左X）：内側ビーム 左上→右下 -->
+            <line x1="30" y1="4" x2="45" y2="64" stroke="white" stroke-width="12"/>
+            <!-- 千木（右X）：内側ビーム 右上→左下 -->
+            <line x1="70" y1="4" x2="55" y2="64" stroke="white" stroke-width="12"/>
+            <!-- 千木（右X）：外側ビーム 左上→右下 -->
+            <line x1="56" y1="4" x2="90" y2="64" stroke="white" stroke-width="12"/>
+            <!-- 梁1（上段・台形：上が狭く下が広い） -->
+            <polygon points="24,70 76,70 80,76 20,76" fill="white"/>
+            <!-- 梁2（中段・台形） -->
+            <polygon points="14,81 86,81 90,89 10,89" fill="white"/>
+            <!-- 梁3（下段・台形：最も長く太い） -->
+            <polygon points="6,93 94,93 98,103 2,103" fill="white"/>
           </svg>
           <span class="text-sm font-bold tracking-[0.25em] uppercase">Discovery Hida</span>
         </a>

@@ -61,22 +61,25 @@ const tours = Object.entries(tourFiles)
     <div class="relative z-10 text-center max-w-3xl">
       <div class="mb-8">
         <!-- ヒーロー用ロゴマーク（大サイズ） -->
-        <svg width="90" height="100" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 opacity-95">
-          <!-- 上部装飾：縦長ダイヤモンド -->
-          <path d="M45 2 L57 20 L45 38 L33 20 Z" stroke="white" stroke-width="2"/>
-          <!-- 上部装飾：横長ダイヤモンド（交差） -->
-          <path d="M18 20 L45 10 L72 20 L45 30 Z" stroke="white" stroke-width="2"/>
-          <!-- 建物本体（長方形） -->
-          <rect x="9" y="38" width="72" height="56" stroke="white" stroke-width="2"/>
-          <!-- 横ライン1 -->
-          <line x1="9" y1="53" x2="81" y2="53" stroke="white" stroke-width="1.5"/>
-          <!-- 横ライン2 -->
-          <line x1="9" y1="68" x2="81" y2="68" stroke="white" stroke-width="1.5"/>
-          <!-- 横ライン3 -->
-          <line x1="9" y1="83" x2="81" y2="83" stroke="white" stroke-width="1.5"/>
+        <svg width="140" height="161" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4 opacity-95">
+          <!-- 千木（左X）：外側ビーム 右上→左下 -->
+          <line x1="44" y1="4" x2="10" y2="64" stroke="white" stroke-width="12"/>
+          <!-- 千木（左X）：内側ビーム 左上→右下 -->
+          <line x1="30" y1="4" x2="45" y2="64" stroke="white" stroke-width="12"/>
+          <!-- 千木（右X）：内側ビーム 右上→左下 -->
+          <line x1="70" y1="4" x2="55" y2="64" stroke="white" stroke-width="12"/>
+          <!-- 千木（右X）：外側ビーム 左上→右下 -->
+          <line x1="56" y1="4" x2="90" y2="64" stroke="white" stroke-width="12"/>
+          <!-- 梁1（上段・台形：上が狭く下が広い） -->
+          <polygon points="24,70 76,70 80,76 20,76" fill="white"/>
+          <!-- 梁2（中段・台形） -->
+          <polygon points="14,81 86,81 90,89 10,89" fill="white"/>
+          <!-- 梁3（下段・台形：最も長く太い） -->
+          <polygon points="6,93 94,93 98,103 2,103" fill="white"/>
         </svg>
-        <p class="text-xs tracking-[0.5em] uppercase text-white/70 mb-2">DISCOVERY</p>
-        <p class="text-3xl font-bold tracking-[0.4em] uppercase">HIDA</p>
+        <!-- Share Tech Mono フォントでロゴテキスト -->
+        <p class="text-xs uppercase text-white/70 mb-2" style="font-family:'Share Tech Mono',monospace; letter-spacing:0.6em;">DISCOVERY</p>
+        <p class="text-4xl uppercase" style="font-family:'Share Tech Mono',monospace; letter-spacing:0.3em;">HIDA</p>
       </div>
       <p class="text-stone-300 leading-relaxed max-w-2xl mx-auto mb-10">{hero_subtitle}</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
